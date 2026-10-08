@@ -13,6 +13,7 @@ def lottoziehung(anzahl_zahlen=6):
     return kugeln[letzter + 1:]
 
 
+
 def statistik_aktualisieren(statistik, ziehung):
     for zahl in ziehung:
         statistik[zahl] += 1
