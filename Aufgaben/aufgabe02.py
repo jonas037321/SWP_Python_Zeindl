@@ -1,18 +1,16 @@
 import random
 
 
-def lottoziehung():
-    kugeln = list(range(1, 46))   # [1, 2, ..., 45]
-    gezogen = []
-    letzter = 44                  # letzter freier Index
+def lottoziehung(anzahl_zahlen=6):
+    kugeln = list(range(1, 46))
+    letzter = 44
 
-    for i in range(6):
-        index = random.randint(0, letzter)          # 1 Zufallsaufruf pro Zahl
-        gezogen.append(kugeln[index])
-        kugeln[index] = kugeln[letzter]             # letzte freie Kugel ins Loch
-        letzter -= 1                                # Bereich wird kleiner
+    for i in range(anzahl_zahlen):
+        index = random.randint(0, letzter)
+        kugeln[index], kugeln[letzter] = kugeln[letzter], kugeln[index]
+        letzter -= 1
 
-    return gezogen
+    return kugeln[letzter + 1:]
 
 
 def statistik_aktualisieren(statistik, ziehung):
@@ -32,10 +30,17 @@ def lotto_statistik(anzahl):
     return statistik
 
 
-print("Lottozahlen:", sorted(lottoziehung()))
+def statistik_ausgeben(statistik, anzahl):
+    print("\nStatistik nach", anzahl, "Ziehungen:")
+    for zahl in statistik:
+        prozent = statistik[zahl] / (anzahl * 6) * 100
+        print(zahl, ":", statistik[zahl], "-", round(prozent, 2), "%")
+
+# print("Lottozahlen:", sorted(lottoziehung()))
+
+# alle = lottoziehung(45)
+# print("Alle 45 gezogen, keine doppelt:", sorted(alle) == list(range(1, 46)))
 
 for anzahl in [1000, 10000, 100000]:
-    print("\nStatistik nach", anzahl, "Ziehungen:")
     statistik = lotto_statistik(anzahl)
-    for zahl in statistik:
-        print(zahl, ":", statistik[zahl])
+    statistik_ausgeben(statistik, anzahl)
