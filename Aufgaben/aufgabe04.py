@@ -118,5 +118,5 @@ for _ in range(anz_Spiele):
 for i in range(0, 10):
     x = statistik_anzahlen[i]
     percentage = x / anz_Spiele * 100
-    print(statistik[i], " wurde so oft gezogen: ", x, " Das sind soviel Prozent: ", round(percentage, 2), "%")
+    print(statistik[i], " wurde so oft gezogen: ", x, " Das sind soviel Prozent: ", round(percentage, 5), "%")
 
