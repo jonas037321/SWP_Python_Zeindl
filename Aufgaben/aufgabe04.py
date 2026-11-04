@@ -13,7 +13,7 @@ def searchHand(colorsTaken, symbolsTaken):
     pair = 0
     fourOAKind = 0
 
-    street = 0
+    street = 0 # Anzahl aufeinanderfolgende Karten
 
     for i in range(0,13):
         match symbolsTaken[i]:
@@ -34,21 +34,21 @@ def searchHand(colorsTaken, symbolsTaken):
             case 4: fourOAKind +=1
 
     if flush is True:
-        return 3
+        return 3 # Flush
     if pair == 2:
-        return 7
+        return 7 # Two Pair
     if pair  == 1:
         if drill == 1:
-            return 8
+            return 8 # Full House
         else:
-            return 0
+            return 0 # Pair
     if drill == 1:
         return 1 # Drilling
     if fourOAKind == 1:
-        return 2
-    return 9
+        return 2 # FourOfAKind
+    return 9 # nix
 
-
+# wie lotto: 5 Karten holen aus 52
 def getFiveRandom(anz):
     nums = list(range(anz))
     letzter = anz-1
@@ -111,10 +111,12 @@ for _ in range(anz_Spiele):
     zahlen.sort()
     #print(zahlen)
 
-    stat = statisticAktualisieren(zahlen)
-    statistik_anzahlen[stat] += 1
+    hand = statisticAktualisieren(zahlen)
+    statistik_anzahlen[hand] += 1
 
+print("Anzahl der Spiele: ", anz_Spiele)
 
+# Ausgabe
 for i in range(0, 10):
     x = statistik_anzahlen[i]
     percentage = x / anz_Spiele * 100
